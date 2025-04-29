@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cab Booking System</h1>
+        <form id="cabForm">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="destination">Enter destination:</label>
+            <input type="text" id="destination" name="destination" required>
+            
+            <button type="submit">Request Cab</button>
+        </form>
+        
+        <div id="rideDetails" style="display:none;">
+            <p>Driver: <span id="driverName"></span></p>
+            <p>Fare: $<span id="fare"></span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
