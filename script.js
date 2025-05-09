@@ -1,34 +1,17 @@
-document.getElementById("cabForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+function requestCab() {
+    var name = document.getElementById("username").value;
+    var source = document.getElementById("source").value;
+    var destination = document.getElementById("destination").value;
 
-    const name = document.getElementById("name").value;
-    const destination = document.getElementById("destination").value;
+    var driver = "Driver 1";
+    var fare = 500; // ₹500 fare
 
-    // Simulate the process of requesting a cab
-    const driver = assignRandomDriver();
-    const fare = calculateFare(destination);
+    var result = `
+        <p><strong>Passenger:</strong> ${name}</p>
+        <p><strong>Route:</strong> From ${source} to ${destination}</p>
+        <p><strong>Driver:</strong> ${driver}</p>
+        <p><strong>Fare:</strong> ₹${fare}</p>
+    `;
 
-    // Display the details
-    document.getElementById("driverName").innerText = driver;
-    document.getElementById("fare").innerText = fare;
-
-    // Show the ride details
-    document.getElementById("rideDetails").style.display = "block";
-});
-
-function assignRandomDriver() {
-    const drivers = ["Driver 1", "Driver 2", "Driver 3"];
-    const randomIndex = Math.floor(Math.random() * drivers.length);
-    return drivers[randomIndex];
-}
-
-function calculateFare(destination) {
-    const fares = {
-        "A": 10,
-        "B": 20,
-        "C": 30,
-        "D": 40
-    };
-
-    return fares[destination] || 50;
+    document.getElementById("result").innerHTML = result;
 }
