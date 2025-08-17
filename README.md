@@ -1,34 +1,32 @@
-# 🚖 Cab Booking System
+# Cab Booking System
 
-A simple and interactive **Cab Booking System** built with **HTML, CSS, and JavaScript**, integrated with **Google Maps API** to provide route drawing, distance calculation, and fare estimation.  
+A responsive **Cab Booking System** with a landing page, live fare calculation, and Google Maps integration. Users can select pickup and drop locations, choose cab type, and see fare estimation in real-time.
 
-🔗 **Live Demo:** [Cab Booking System](https://anjali-cool.github.io/cab-booking-html/)
+---
+
+## 🔗 Live Demo
+Check it out live: [Cab Booking System](https://YOUR-USERNAME.github.io/cab-booking-system/)
 
 ---
 
 ## ✨ Features
-- ✅ Enter pickup and drop locations  
-- ✅ Real-time route drawing on Google Maps  
-- ✅ Automatic distance calculation  
-- ✅ Fare estimation based on distance & cab type  
-- ✅ Simple, responsive, and easy-to-use UI  
+- Interactive landing page
+- Pickup and drop location input
+- Distance and fare calculation
+- Cab type selection
+- Google Maps route visualization
 
 ---
 
-## 🛠️ Tech Stack
-- **Frontend:** HTML, CSS, JavaScript  
-- **API:** Google Maps JavaScript API  
+## 🖼 Screenshots
+![Landing Page](screenshots/landing-page.png)  
+![Booking Page](screenshots/booking-page.png)  
+
+*(Create a folder named `screenshots` and put your images there)*
 
 ---
 
-## 📸 Screenshots
-_Add your project screenshots here_  
-Example:  
-![Cab Booking Screenshot](./screenshot.png)
-
----
-
-## 🚀 How to Run Locally
-1. Clone this repository:  
+## 💻 Installation / How to Run Locally
+1. Clone the repository:
    ```bash
-   git clone https://github.com/anjali-cool/cab-booking-html.git
+   git clone https://github.com/YOUR-USERNAME/cab-booking-system.git
