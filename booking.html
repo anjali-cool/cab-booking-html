@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Cab Booking</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #4facfe, #00f2fe);
+      color: #333;
+    }
+    header {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #0078d7;
+    }
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .booking-form {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .booking-form h2 {
+      margin-top: 0;
+      color: #0078d7;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background: #0078d7;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    #map {
+      flex: 2;
+      height: 500px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .fare-box {
+      background: #f1f9ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #0078d7;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚖 Smart Cab Booking System</h1>
+    <p>Book your ride in seconds with live fare estimation</p>
+  </header>
+
+  <div class="container">
+    <div class="booking-form">
+      <h2>Book Your Cab</h2>
+      <label for="pickup">Pickup Location:</label>
+      <input type="text" id="pickup" placeholder="Enter pickup location">
+
+      <label for="drop">Drop Location:</label>
+      <input type="text" id="drop" placeholder="Enter drop location">
+
+      <label for="cabType">Choose Cab Type:</label>
+      <select id="cabType">
+        <option value="10">🚗 Mini - ₹10/km</option>
+        <option value="15">🚘 Sedan - ₹15/km</option>
+        <option value="20">🚖 SUV - ₹20/km</option>
+      </select>
+
+      <button onclick="calculateRoute()">Book Now</button>
+
+      <div class="fare-box" id="fare">Fare: ₹0</div>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <script>
+    let map, directionsService, directionsRenderer;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: { lat: 28.6139, lng: 77.2090 } // Default center Delhi
+      });
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+
+      // Autocomplete for inputs
+      new google.maps.places.Autocomplete(document.getElementById("pickup"));
+      new google.maps.places.Autocomplete(document.getElementById("drop"));
+    }
+
+    function calculateRoute() {
+      const pickup = document.getElementById("pickup").value;
+      const drop = document.getElementById("drop").value;
+      const cabRate = parseInt(document.getElementById("cabType").value);
+
+      if (!pickup || !drop) {
+        alert("Please enter both pickup and drop locations.");
+        return;
+      }
+
+      directionsService.route(
+        {
+          origin: pickup,
+          destination: drop,
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+          if (status === "OK") {
+            directionsRenderer.setDirections(response);
+
+            const route = response.routes[0].legs[0];
+            const distanceKm = route.distance.value / 1000;
+            const fare = distanceKm * cabRate;
+            document.getElementById("fare").innerText =
+              `Fare: ₹${fare.toFixed(2)} (Distance: ${distanceKm.toFixed(2)} km)`;
+          } else {
+            alert("Directions request failed: " + status);
+          }
+        }
+      );
+    }
+  </script>
+
+  <!-- Google Maps API with your key -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1F6RLwRoQ3PKg1YKEORErHb5Tto7kHuM&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>

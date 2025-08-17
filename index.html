@@ -1,100 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cab Booking System</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1502877338535-766e1452684a') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
     }
-    #map {
-      height: 400px;
-      width: 100%;
+    .container {
+      background: rgba(0,0,0,0.5);
+      padding: 50px;
+      border-radius: 15px;
     }
-    .form-container {
-      margin: 20px;
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
     }
-    input, button {
-      padding: 10px;
-      margin: 5px;
-      width: 250px;
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #ffcc00;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    #output {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
+    .btn:hover {
+      background: #ffaa00;
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <h2>Cab Booking System 🚕</h2>
-
-  <div class="form-container">
-    <input id="pickup" type="text" placeholder="Enter Pickup Location" />
-    <input id="drop" type="text" placeholder="Enter Drop Location" />
-    <br />
-    <button onclick="calculateRoute()">Calculate Fare</button>
-    <div id="output"></div>
+  <div class="container">
+    <h1>🚖 Cab Booking System</h1>
+    <p>Book your cab quickly, safely, and easily!</p>
+    <button class="btn" onclick="window.location.href='booking.html'">Book Now</button>
   </div>
-
-  <div id="map"></div>
-
-  <script>
-    let map, directionsService, directionsRenderer, pickupAutocomplete, dropAutocomplete;
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 28.6139, lng: 77.2090 }, // Default: New Delhi
-        zoom: 12,
-      });
-
-      directionsService = new google.maps.DirectionsService();
-      directionsRenderer = new google.maps.DirectionsRenderer();
-      directionsRenderer.setMap(map);
-
-      pickupAutocomplete = new google.maps.places.Autocomplete(document.getElementById("pickup"));
-      dropAutocomplete = new google.maps.places.Autocomplete(document.getElementById("drop"));
-    }
-
-    function calculateRoute() {
-      const pickup = document.getElementById("pickup").value;
-      const drop = document.getElementById("drop").value;
-
-      if (!pickup || !drop) {
-        alert("Please enter both pickup and drop locations.");
-        return;
-      }
-
-      const request = {
-        origin: pickup,
-        destination: drop,
-        travelMode: "DRIVING",
-      };
-
-      directionsService.route(request, (result, status) => {
-        if (status === "OK") {
-          directionsRenderer.setDirections(result);
-
-          const distanceText = result.routes[0].legs[0].distance.text;
-          const distanceValue = result.routes[0].legs[0].distance.value / 1000; // in km
-          const fare = (distanceValue * 12).toFixed(2); // ₹12 per km
-
-          document.getElementById("output").innerHTML =
-            `Distance: ${distanceText} <br> Estimated Fare: ₹${fare}`;
-        } else {
-          alert("Directions request failed due to " + status);
-        }
-      });
-    }
-  </script>
-
-  <!-- Google Maps API with your key -->
-  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1F6RLwRoQ3PKg1YKEORErHb5Tto7kHuM&libraries=places&callback=initMap">
-  </script>
 </body>
 </html>
