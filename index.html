@@ -1,28 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Cab Booking System</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cab Booking System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    .form-container {
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      width: 250px;
+    }
+    #output {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Cab Booking System</h2>
+  <h2>Cab Booking System 🚕</h2>
 
-        <label>Enter your name:</label>
-        <input type="text" id="username" placeholder="Enter your name">
+  <div class="form-container">
+    <input id="pickup" type="text" placeholder="Enter Pickup Location" />
+    <input id="drop" type="text" placeholder="Enter Drop Location" />
+    <br />
+    <button onclick="calculateRoute()">Calculate Fare</button>
+    <div id="output"></div>
+  </div>
 
-        <label>Enter pickup location:</label>
-        <input type="text" id="source" placeholder="Enter pickup point">
+  <div id="map"></div>
 
-        <label>Enter destination:</label>
-        <input type="text" id="destination" placeholder="Enter destination">
+  <script>
+    let map, directionsService, directionsRenderer, pickupAutocomplete, dropAutocomplete;
 
-        <button onclick="requestCab()">Request Cab</button>
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 28.6139, lng: 77.2090 }, // Default: New Delhi
+        zoom: 12,
+      });
 
-        <div id="result"></div>
-    </div>
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
 
-    <script src="script.js"></script>
+      pickupAutocomplete = new google.maps.places.Autocomplete(document.getElementById("pickup"));
+      dropAutocomplete = new google.maps.places.Autocomplete(document.getElementById("drop"));
+    }
+
+    function calculateRoute() {
+      const pickup = document.getElementById("pickup").value;
+      const drop = document.getElementById("drop").value;
+
+      if (!pickup || !drop) {
+        alert("Please enter both pickup and drop locations.");
+        return;
+      }
+
+      const request = {
+        origin: pickup,
+        destination: drop,
+        travelMode: "DRIVING",
+      };
+
+      directionsService.route(request, (result, status) => {
+        if (status === "OK") {
+          directionsRenderer.setDirections(result);
+
+          const distanceText = result.routes[0].legs[0].distance.text;
+          const distanceValue = result.routes[0].legs[0].distance.value / 1000; // in km
+          const fare = (distanceValue * 12).toFixed(2); // ₹12 per km
+
+          document.getElementById("output").innerHTML =
+            `Distance: ${distanceText} <br> Estimated Fare: ₹${fare}`;
+        } else {
+          alert("Directions request failed due to " + status);
+        }
+      });
+    }
+  </script>
+
+  <!-- Google Maps API with your key -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1F6RLwRoQ3PKg1YKEORErHb5Tto7kHuM&libraries=places&callback=initMap">
+  </script>
 </body>
 </html>
