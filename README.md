@@ -5,7 +5,8 @@ A responsive **Cab Booking System** with a landing page, live fare calculation, 
 ---
 
 ## 🔗 Live Demo
-Check it out live: [Cab Booking System](https://YOUR-USERNAME.github.io/cab-booking-system/)
+Check it out live: [Cab Booking System](https://anjali-cool.github.io/cab-booking-system/
+)
 
 ---
 
