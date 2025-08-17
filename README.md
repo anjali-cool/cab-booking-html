@@ -5,8 +5,7 @@ A responsive **Cab Booking System** with a landing page, live fare calculation, 
 ---
 
 ## 🔗 Live Demo
-Check it out live: [Cab Booking System](https://anjali-cool.github.io/cab-booking-system/
-)
+Check it out live: [Cab Booking System](https://anjali-cool.github.io/cab-booking-system/)
 
 ---
 
@@ -20,14 +19,8 @@ Check it out live: [Cab Booking System](https://anjali-cool.github.io/cab-bookin
 ---
 
 ## 🖼 Screenshots
-![Landing Page](screenshots/landing-page.png)  
-![Booking Page](screenshots/booking-page.png)  
+![Landing Page](./screenshots/landing-page.png)  
+![Booking Page](./screenshots/booking-page.png)  
 
-*(Create a folder named `screenshots` and put your images there)*
+> **Note:** Make sure the screenshots folder is inside the repository root, like this:
 
----
-
-## 💻 Installation / How to Run Locally
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/cab-booking-system.git
