@@ -24,8 +24,9 @@ Check it out live: [Cab Booking System](https://anjali-cool.github.io/cab-bookin
 ---
 
 ## 🖼 Screenshots
-![Landing Page](./screenshots/landing-page.png)  
+![Landing Page](./screenshots/landing-page.png)
 ![Booking Page](./screenshots/booking-page.png)
+
 
 > **Note:** Make sure the `screenshots` folder is inside the repository root:
 
